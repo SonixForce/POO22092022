@@ -10,6 +10,8 @@ import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.Label;
 import java.awt.TextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -43,7 +45,9 @@ public class VentanaV2 extends Frame {
         this.boton_1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                etiqueta.setText(cuadroTexto.getText());
+                etiqueta.setText("Hola " + cuadroTexto.getText());
+                System.out.println("Coordenadas x = " + e.getX());
+                System.out.println("Coordenadas y = " + e.getY());
             }
         });
         
@@ -51,6 +55,14 @@ public class VentanaV2 extends Frame {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
+            }
+        });
+        
+        this.cuadroTexto.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                System.out.println(e.getKeyChar());
+                System.out.println(e.getKeyCode());
             }
             
         });
