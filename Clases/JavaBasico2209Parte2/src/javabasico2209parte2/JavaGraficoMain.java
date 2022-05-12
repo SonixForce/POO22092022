@@ -6,6 +6,7 @@ package javabasico2209parte2;
 
 import ico.fes.awt.Ventana;
 import ico.fes.awt.VentanaV2;
+import ico.fes.swing.VentanaSwing;
 
 /**
  *
@@ -13,6 +14,8 @@ import ico.fes.awt.VentanaV2;
  */
 public class JavaGraficoMain {
     public static void main(String[] args) {
-        VentanaV2 window = new VentanaV2();
+        //VentanaV2 window = new VentanaV2();
+        VentanaSwing ventana = new VentanaSwing();
+        
     }
 }
