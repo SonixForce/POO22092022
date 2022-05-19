@@ -38,7 +38,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "nombre=" + nombre + ", edad=" + edad + '}';
+        return "Nombre: " + this.nombre + " y edad: " + this.edad;
     }
     
     public void comer(){

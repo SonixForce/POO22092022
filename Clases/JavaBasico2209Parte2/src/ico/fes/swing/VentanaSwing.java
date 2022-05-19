@@ -4,20 +4,27 @@
  */
 package ico.fes.swing;
 
+import ico.fes.herencia.Persona;
+import ico.fes.modelo.ModeloPersonaCombo;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -32,6 +39,9 @@ public class VentanaSwing extends JFrame{
     private JLabel instruccion;
     private float gradosF = 0;
     ImageIcon icono = new ImageIcon(System.getProperty("user.dir") + "/src/ico/fes/swing/img/Temperatura.png");
+    private JComboBox<Persona> lista;
+    private ModeloPersonaCombo modelo;
+    private JTextArea texto;
     
     public VentanaSwing() throws HeadlessException {
         
@@ -45,11 +55,26 @@ public class VentanaSwing extends JFrame{
         boton.setToolTipText("Click para convertir a °F");
         resultado = new JLabel("El resultado es: " + gradosF + "°F");
         instruccion = new JLabel("Introduce los °F a convertir: ");
+        modelo = new ModeloPersonaCombo();
+        texto = new JTextArea(5, 5);
+        
+        /*
+        lista = new JComboBox<>();
+        lista.addItem("Ingenieria");
+        lista.addItem("Derecho");
+        lista.addItem("Periodismo");
+        lista.addItem("Arquitectura");
+        */
+        
+        modelo.consultarBaseDatos();
+        lista.setModel(modelo);
         
         this.getContentPane().add(instruccion);
         this.getContentPane().add(cuadro);
         this.getContentPane().add(boton);
         this.getContentPane().add(resultado);
+        this.getContentPane().add(lista);
+        this.getContentPane().add(texto);
         
         this.validate();
         this.setVisible(true);
@@ -67,6 +92,13 @@ public class VentanaSwing extends JFrame{
             }
         });
         
+        this.lista.addItemListener(new ItemAdapter(){
+            @Override
+            public void itemStateChanged(ItemEvent ie) {
+                System.out.println("evento " + ie.getItem());
+                texto.setText(ie.getItem() + "\n");
+            }
+        });
         
         this.addWindowListener(new WindowAdapter() {
             @Override
